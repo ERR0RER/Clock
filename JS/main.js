@@ -62,8 +62,8 @@ function getTime(){
 function setCurrentTime() {
 	const {hour, minute, seconds} = getTime();
 	updateSecond(seconds);
-	updateMinutes(minute);
-	updateHours(hour);
+	updateMinutes(minute, seconds);
+	updateHours(hour, minute);
 	setTimeout(setCurrentTime, 1000);
 }
 
@@ -72,13 +72,13 @@ function updateSecond(currentTime) {
 	document.documentElement.style.setProperty('--second-rotate', `${rotate}deg`)
 }
 
-function updateMinutes(currentTime){
-	let rotate = currentTime * 6;
+function updateMinutes(currentTime, second){
+	let rotate = currentTime * 6 + (second * 0.1);
 	document.documentElement.style.setProperty('--minute-rotate', `${rotate}deg`)
 }
 
-function updateHours(currentTime) {
-	let rotate = currentTime * 30;
+function updateHours(currentTime, minute) {
+	let rotate = currentTime * 30 + (minute * 0.5);
 	document.documentElement.style.setProperty('--sentry-rotate', `${rotate}deg`)
 }
 
