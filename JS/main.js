@@ -1,18 +1,22 @@
 function placementNumbers() {
-	const numberOfClock = document.querySelectorAll('.time > span')
+	const time = document.querySelector('.time');
 
-	numberOfClock.forEach((element, index) => {
-		const angle = (index + 1) * 30;
-		const radius = 265;
-		const centerX = 265;
-		const centerY = 265;
-
+	const radius = 265;
+	const centerX = 265;
+	const centerY = 265;
+	
+	for (let i = 0; i <= 11; i++){
+		const angle = (i + 1) * 30;
+		const number = document.createElement("span");
+		number.innerHTML = i + 1;
 		const x = centerX + radius * Math.cos((angle - 90) * Math.PI / 180);
 		const y = centerY + radius * Math.sin((angle - 90) * Math.PI / 180);
 
-		element.style.left = `${x}px`;
-		element.style.top = `${y}px`;
-	});
+		number.style.left = `${x}px`;
+		number.style.top = `${y}px`;
+
+		time.appendChild(number);
+	}
 }
 
 function PlacementSticks() {
@@ -50,12 +54,17 @@ function PlacementSticks() {
 	}
 }
 
-function currentTime(){
+function getTime(){
 	const date = new Date();
-	setTimeout(currentTime, 1000);
-	updateSecond(date.getSeconds());
-	updateMinutes(date.getMinutes());
-	updateHours(date.getHours());
+	return {hour: date.getHours(), minute: date.getMinutes(), seconds: date.getSeconds()}
+}
+
+function setCurrentTime() {
+	const {hour, minute, seconds} = getTime();
+	updateSecond(seconds);
+	updateMinutes(minute);
+	updateHours(hour);
+	setTimeout(setCurrentTime, 1000);
 }
 
 function updateSecond(currentTime) {
@@ -76,6 +85,6 @@ function updateHours(currentTime) {
 window.addEventListener('load', () => {
 	placementNumbers();
 	PlacementSticks();
-	currentTime();
+	setCurrentTime();
 })
 
