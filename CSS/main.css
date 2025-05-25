@@ -23,7 +23,7 @@ html {
 	width: 700px;
 	height: 700px;
 	background: #c2c3c7;
-	border-radius: 60px;
+	border-radius: 50%;
 	box-shadow:
 		5px 5px 10px #999,
 		-5px -5px 10px #fff;
